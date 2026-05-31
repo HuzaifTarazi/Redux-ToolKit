@@ -1,5 +1,5 @@
 import React from 'react'
-import { pexelsApi } from './Api/mediaApi'
+import { pexelsApi } from './Api/mediaApi.js'
 const App = () => {
 
   return (<>
