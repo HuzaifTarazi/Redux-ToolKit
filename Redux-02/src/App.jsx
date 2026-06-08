@@ -1,7 +1,10 @@
 import React from "react";
 import { giphyApi, pexelsApi } from "./Api/mediaApi.js";
 import { unsplashApi } from "./Api/mediaApi.js";
+import { useSelector } from "react-redux";
 const App = () => {
+  const searchData = useSelector((state) => state.search.value )
+  
   return (
     <>
       <div className="text-white h-screen bg-gray-900">
