@@ -2,38 +2,16 @@ import React from "react";
 import { giphyApi, pexelsApi } from "./Api/mediaApi.js";
 import { unsplashApi } from "./Api/mediaApi.js";
 import { useSelector } from "react-redux";
+import SearchBox from "./components/searchBox.jsx";
+
 const App = () => {
-  const searchData = useSelector((state) => state.search.value )
-  
+  const searchData = useSelector((state) => state.search.value);
   return (
     <>
-      <div className="text-white h-screen bg-gray-900">
-        <button
-          className="bg-red-500 m-5 p-3 hover:bg-red-600 active:bg-red-700"
-          onClick={() => {
-            unsplashApi("cat");
-          }}
-        >
-          GET PHOTOS
-        </button>
-        <button
-          className="bg-red-500 m-5 p-3 hover:bg-red-600 active:bg-red-700"
-          onClick={() => {
-            pexelsApi("cat");
-          }}
-        >
-          GET VIDEOS
-        </button>
-
-          <button
-          className="bg-red-500 m-5 p-3 hover:bg-red-600 active:bg-red-700"
-          onClick={() => {
-            giphyApi('cheeseburger')
-          }}
-        >
-          GET GIPHY
-        </button>
+      <div className="bg-cyan-900 p-2 shadow-lg">
+        <SearchBox />
       </div>
+      <div className="text-white h-screen bg-gray-900"></div>
     </>
   );
 };
