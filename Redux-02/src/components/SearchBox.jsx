@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-
+import { useDispatch, useSelector } from 'react-redux'
+import { setQuery } from "../features/searchSlice/searchSlice";
 const SearchBox = () => {
   const [searchBox, setsearchBox] = useState("");
+  const dispatch = useDispatch()
   return (
     <>
       <form
         onSubmit={(e) => {
           e.preventDefault();
+          dispatch(setQuery(searchBox))
         }}
         className="flex flex-row  items-center justify-center"
       >
