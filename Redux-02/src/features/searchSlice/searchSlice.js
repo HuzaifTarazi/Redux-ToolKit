@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     query: '',
-    activeTab: 'photos',
+    activeTab: '',
     results: [], 
     loading: false,
     error: null,

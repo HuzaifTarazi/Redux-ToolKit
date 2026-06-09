@@ -9,7 +9,7 @@ export const unsplashApi = async (query, page = 1, per_page = 20) => {
         const res = await axios.get('https://api.unsplash.com/search/photos', {
             params: { query, page, per_page }, headers: { Authorization: `Client-ID ${UNSPLASH_KEY}` }
         })
-        console.log(res.data.results)
+        return res.data.results
     } catch (err) {
         console.error(err)
     }
@@ -20,7 +20,7 @@ export const pexelsApi = async (query, page = 1, per_page = 15) => {
         const res = await axios.get('https://api.pexels.com/v1/videos/search', {
             params: { query, page }, headers: { Authorization: PEXELS_KEY }
         })
-        console.log(res.data.videos)
+       return res.data.videos
     } catch (err) {
         console.error(err)
     }
@@ -32,7 +32,7 @@ export const giphyApi = async (query, page = 1) => {
         const res = await axios.get('https://api.giphy.com/v1/gifs/search', {
             params: { q: query, limit: 20, api_key: GIPHY_KEY }
         })
-        console.log(res.data.data)
+        return res.data.data
     } catch (err) {
         console.error(err)
     }
