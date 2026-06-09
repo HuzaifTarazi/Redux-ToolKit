@@ -10,42 +10,30 @@ const ActiveTabResults = () => {
     const dataInAction = async () => {
 
         if (activeTab === 'Photos') {
-            if (!query) {
-                alert('Insert Query')
-                dispatch(setActiveTab(''))
-                return
-            }
+
             apiData = await unsplashApi(query)
             console.log(apiData)
         }
         if (activeTab === 'Videos') {
-            if (!query) {
-                alert('Insert Query')
-                dispatch(setActiveTab(''))
-                return
-            }
+
             apiData = await pexelsApi(query)
             console.log(apiData)
         }
         if (activeTab === 'GIFs') {
-            if (!query) {
-                alert('Insert Query')
-                dispatch(setActiveTab(''))
-                return
-            }
+
             apiData = await giphyApi(query)
             console.log(apiData)
         }
     }
 
     useEffect(() => {
-        dataInAction()
+        if (query) {
+            dataInAction()
+        }
         return () => {
             apiData = null
         }
-    }, [activeTab])
-
-
+    }, [query, activeTab])
 
     return (
         <div>
