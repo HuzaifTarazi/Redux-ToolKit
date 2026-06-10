@@ -4,11 +4,12 @@ const UNSPLASH_KEY = import.meta.env.VITE_UNSPLASH_KEY
 const PEXELS_KEY = import.meta.env.VITE_PEXELS_KEY
 const GIPHY_KEY = import.meta.env.VITE_GIPHY_KEY
 
-export const unsplashApi = async (query, page = 1, per_page = 20) => {
+export const unsplashApi = async (query, page = 1, per_page = 21) => {
     try {
         const res = await axios.get('https://api.unsplash.com/search/photos', {
             params: { query, page, per_page }, headers: { Authorization: `Client-ID ${UNSPLASH_KEY}` }
         })
+        console.log(res.data.results)
         return res.data.results.map((items) => ({
             id: items.id,
             type: items.asset_type,
@@ -21,18 +22,20 @@ export const unsplashApi = async (query, page = 1, per_page = 20) => {
     }
 }
 
-export const pexelsApi = async (query, page = 1, per_page = 15) => {
+export const pexelsApi = async (query, page = 1, per_page = 16) => {
     try {
         const res = await axios.get('https://api.pexels.com/v1/videos/search', {
             params: { query, page }, headers: { Authorization: PEXELS_KEY }
         })
+        console.log(res.data.video)
         return res.data.videos.map((items) => ({
             id: items.id,
             type: 'video',
             title: items.title || 'video',
             thumbnail: items.image,
-            src: items.url
+            src: items.video_files[0].link 
         }))
+
     } catch (err) {
         console.error(err)
     }
@@ -42,13 +45,14 @@ export const pexelsApi = async (query, page = 1, per_page = 15) => {
 export const giphyApi = async (query, page = 1) => {
     try {
         const res = await axios.get('https://api.giphy.com/v1/gifs/search', {
-            params: { q: query, limit: 20, api_key: GIPHY_KEY }
+            params: { q: query, limit: 21, api_key: GIPHY_KEY }
         })
+        console.log(res.data.data)
         return res.data.data.map((items) => ({
             id: items.id,
             type: items.type,
             title: items.title || 'GIF',
-            src: items.url
+            src: items.images.original.url
         }))
     } catch (err) {
         console.error(err)
