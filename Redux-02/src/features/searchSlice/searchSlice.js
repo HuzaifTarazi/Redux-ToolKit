@@ -20,16 +20,13 @@ const searchSlice = createSlice({
         },
         setResults(state, action){
             state.results = action.payload
-            state.loading = false
         },
         setLoading(state, action){
             state.loading = action.payload
-            state.loading = true
             state.error = null 
         },
-        setError(state,action){
+        setError(state, action){
             state.error = action.payload
-            state.loading = false
         },
         clearResult(state){
             state.results = []

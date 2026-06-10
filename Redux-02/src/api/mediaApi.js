@@ -9,7 +9,13 @@ export const unsplashApi = async (query, page = 1, per_page = 20) => {
         const res = await axios.get('https://api.unsplash.com/search/photos', {
             params: { query, page, per_page }, headers: { Authorization: `Client-ID ${UNSPLASH_KEY}` }
         })
-        return res.data.results
+        return res.data.results.map((items) => ({
+            id: items.id,
+            type: items.asset_type,
+            title: items.title || 'Photo',
+            thumbnail: items.urls.thumb,
+            src: items.urls.raw
+        }))
     } catch (err) {
         console.error(err)
     }
@@ -20,7 +26,13 @@ export const pexelsApi = async (query, page = 1, per_page = 15) => {
         const res = await axios.get('https://api.pexels.com/v1/videos/search', {
             params: { query, page }, headers: { Authorization: PEXELS_KEY }
         })
-       return res.data.videos
+        return res.data.videos.map((items) => ({
+            id: items.id,
+            type: 'video',
+            title: items.title || 'video',
+            thumbnail: items.image,
+            src: items.url
+        }))
     } catch (err) {
         console.error(err)
     }
@@ -32,7 +44,12 @@ export const giphyApi = async (query, page = 1) => {
         const res = await axios.get('https://api.giphy.com/v1/gifs/search', {
             params: { q: query, limit: 20, api_key: GIPHY_KEY }
         })
-        return res.data.data
+        return res.data.data.map((items) => ({
+            id: items.id,
+            type: items.type,
+            title: items.title || 'GIF',
+            src: items.url
+        }))
     } catch (err) {
         console.error(err)
     }

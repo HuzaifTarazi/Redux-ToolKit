@@ -9,8 +9,7 @@ const App = () => {
       <div className="bg-cyan-900 p-2 shadow-lg">
         <SearchBox />
       </div>
-
-      <div className="text-white h-screen bg-gray-900">
+      <div className="h-screen text-white  bg-gray-900 flex flex-col">
         <Tabs />
         <div className="bg-gray-300 mt-3 p-3 m-10 rounded text-black">
           <ActiveTabResults />
